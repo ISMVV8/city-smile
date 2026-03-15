@@ -31,7 +31,7 @@ function Stars({ count }: { count: number }) {
       {Array.from({ length: count }).map((_, i) => (
         <svg
           key={i}
-          className="h-4 w-4 text-gold"
+          className="h-4 w-4 text-amber-400"
           fill="currentColor"
           viewBox="0 0 20 20"
         >
@@ -44,13 +44,13 @@ function Stars({ count }: { count: number }) {
 
 export default function Testimonials() {
   return (
-    <section id="avis" className="scroll-mt-16 py-24 lg:py-32">
+    <section id="avis" className="scroll-mt-16 bg-section-alt py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-gold">
+          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-accent">
             Avis clients
           </p>
-          <h2 className="mt-4 font-[var(--font-accent)] text-3xl font-bold sm:text-4xl lg:text-5xl">
+          <h2 className="mt-4 font-[var(--font-accent)] text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl">
             Ce que disent nos clients
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-muted">
@@ -63,15 +63,15 @@ export default function Testimonials() {
           {testimonials.map((t) => (
             <div
               key={t.name}
-              className="flex flex-col rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:border-gold/30"
+              className="flex flex-col rounded-2xl border border-border bg-white p-6 card-shadow transition-all duration-300 hover:shadow-lg hover:border-accent/30"
             >
               <Stars count={t.rating} />
-              <p className="mt-4 flex-1 text-sm leading-relaxed text-white/80">
+              <p className="mt-4 flex-1 text-sm leading-relaxed text-muted">
                 &ldquo;{t.text}&rdquo;
               </p>
               <div className="mt-6 border-t border-border pt-4">
-                <p className="font-semibold">{t.name}</p>
-                <p className="text-xs text-gold">{t.service}</p>
+                <p className="font-semibold text-foreground">{t.name}</p>
+                <p className="text-xs text-accent">{t.service}</p>
               </div>
             </div>
           ))}

@@ -48,13 +48,13 @@ const points = [
 
 export default function LearningPoints() {
   return (
-    <section className="bg-card py-24 lg:py-32">
+    <section className="bg-section-alt py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-gold">
+          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-accent">
             Ce que vous apprendrez
           </p>
-          <h2 className="mt-4 font-[var(--font-accent)] text-3xl font-bold sm:text-4xl">
+          <h2 className="mt-4 font-[var(--font-accent)] text-3xl font-bold text-foreground sm:text-4xl">
             Un programme complet
           </h2>
         </div>
@@ -63,13 +63,13 @@ export default function LearningPoints() {
           {points.map((point) => (
             <div
               key={point.title}
-              className="group flex gap-4 rounded-2xl border border-border bg-background p-6 transition-all duration-300 hover:border-gold/30"
+              className="group flex gap-4 rounded-2xl border border-border bg-white p-6 card-shadow transition-all duration-300 hover:shadow-lg hover:border-accent/30"
             >
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gold/10 text-gold transition-colors group-hover:bg-gold/20">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent transition-colors group-hover:bg-accent/20">
                 {point.icon}
               </div>
               <div>
-                <h3 className="font-bold">{point.title}</h3>
+                <h3 className="font-bold text-foreground">{point.title}</h3>
                 <p className="mt-1 text-sm text-muted">{point.description}</p>
               </div>
             </div>

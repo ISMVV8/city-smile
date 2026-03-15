@@ -36,13 +36,13 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section className="py-24 lg:py-32">
+    <section className="bg-section-alt py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-gold">
+          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-accent">
             Comment ça marche
           </p>
-          <h2 className="mt-4 font-[var(--font-accent)] text-3xl font-bold sm:text-4xl lg:text-5xl">
+          <h2 className="mt-4 font-[var(--font-accent)] text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl">
             3 étapes vers votre nouveau sourire
           </h2>
         </div>
@@ -52,16 +52,16 @@ export default function HowItWorks() {
             <div key={step.number} className="relative text-center">
               {/* Connector line */}
               {i < steps.length - 1 && (
-                <div className="absolute right-0 top-12 hidden h-px w-full translate-x-1/2 bg-gradient-to-r from-gold/50 to-transparent md:block" />
+                <div className="absolute right-0 top-12 hidden h-px w-full translate-x-1/2 bg-gradient-to-r from-accent/30 to-transparent md:block" />
               )}
 
-              <div className="relative mx-auto flex h-24 w-24 items-center justify-center rounded-full border border-gold/30 bg-card text-gold">
+              <div className="relative mx-auto flex h-24 w-24 items-center justify-center rounded-full border border-accent/20 bg-white text-accent shadow-sm">
                 {step.icon}
-                <span className="absolute -right-1 -top-1 flex h-7 w-7 items-center justify-center rounded-full bg-gold text-xs font-bold text-background">
+                <span className="absolute -right-1 -top-1 flex h-7 w-7 items-center justify-center rounded-full bg-accent text-xs font-bold text-white">
                   {step.number}
                 </span>
               </div>
-              <h3 className="mt-6 text-xl font-bold">{step.title}</h3>
+              <h3 className="mt-6 text-xl font-bold text-foreground">{step.title}</h3>
               <p className="mt-3 text-sm leading-relaxed text-muted">
                 {step.description}
               </p>

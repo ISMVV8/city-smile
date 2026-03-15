@@ -15,14 +15,14 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-background/80 backdrop-blur-xl">
+    <header className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-white/80 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
-          <span className="font-[var(--font-accent)] text-2xl font-bold tracking-wide text-gold">
+          <span className="font-[var(--font-accent)] text-2xl font-bold tracking-wide text-accent">
             City
           </span>
-          <span className="text-2xl font-light tracking-widest text-white">
+          <span className="text-2xl font-light tracking-widest text-foreground">
             Smile
           </span>
         </Link>
@@ -33,14 +33,14 @@ export default function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-muted transition-colors hover:text-white"
+              className="text-sm font-medium text-muted transition-colors hover:text-foreground"
             >
               {link.label}
             </Link>
           ))}
           <Link
             href="/#reservation"
-            className="btn-gold rounded-full px-6 py-2.5 text-sm"
+            className="btn-accent rounded-full px-6 py-2.5 text-sm"
           >
             Réserver
           </Link>
@@ -54,17 +54,17 @@ export default function Header() {
         >
           <div className="flex flex-col gap-1.5">
             <span
-              className={`block h-0.5 w-6 bg-white transition-all duration-300 ${
+              className={`block h-0.5 w-6 bg-foreground transition-all duration-300 ${
                 mobileOpen ? "translate-y-2 rotate-45" : ""
               }`}
             />
             <span
-              className={`block h-0.5 w-6 bg-white transition-all duration-300 ${
+              className={`block h-0.5 w-6 bg-foreground transition-all duration-300 ${
                 mobileOpen ? "opacity-0" : ""
               }`}
             />
             <span
-              className={`block h-0.5 w-6 bg-white transition-all duration-300 ${
+              className={`block h-0.5 w-6 bg-foreground transition-all duration-300 ${
                 mobileOpen ? "-translate-y-2 -rotate-45" : ""
               }`}
             />
@@ -74,14 +74,14 @@ export default function Header() {
 
       {/* Mobile Menu */}
       {mobileOpen && (
-        <nav className="border-t border-border bg-background px-4 pb-6 pt-4 md:hidden">
+        <nav className="border-t border-border bg-white px-4 pb-6 pt-4 md:hidden">
           <div className="flex flex-col gap-4">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
-                className="text-base font-medium text-muted transition-colors hover:text-white"
+                className="text-base font-medium text-muted transition-colors hover:text-foreground"
               >
                 {link.label}
               </Link>
@@ -89,7 +89,7 @@ export default function Header() {
             <Link
               href="/#reservation"
               onClick={() => setMobileOpen(false)}
-              className="btn-gold mt-2 rounded-full px-6 py-3 text-center text-sm"
+              className="btn-accent mt-2 rounded-full px-6 py-3 text-center text-sm"
             >
               Réserver maintenant
             </Link>

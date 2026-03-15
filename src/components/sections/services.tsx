@@ -48,13 +48,13 @@ const services = [
 
 export default function Services() {
   return (
-    <section id="services" className="scroll-mt-16 py-24 lg:py-32">
+    <section id="services" className="scroll-mt-16 bg-section-alt py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-gold">
+          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-accent">
             Nos services
           </p>
-          <h2 className="mt-4 font-[var(--font-accent)] text-3xl font-bold sm:text-4xl lg:text-5xl">
+          <h2 className="mt-4 font-[var(--font-accent)] text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl">
             Choisissez votre formule
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-muted">
@@ -67,23 +67,23 @@ export default function Services() {
           {services.map((service) => (
             <div
               key={service.name}
-              className={`group relative flex flex-col rounded-2xl border p-8 transition-all duration-300 hover:-translate-y-1 ${
+              className={`group relative flex flex-col rounded-2xl border bg-white p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${
                 service.popular
-                  ? "border-gold/50 bg-card glow-gold"
-                  : "border-border bg-card hover:border-gold/30"
+                  ? "border-accent shadow-md"
+                  : "border-border card-shadow hover:border-accent/30"
               }`}
             >
               {service.popular && (
-                <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gold px-4 py-1 text-xs font-bold uppercase tracking-wider text-background">
+                <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-accent px-4 py-1 text-xs font-bold uppercase tracking-wider text-white">
                   Le plus populaire
                 </span>
               )}
               <div>
-                <h3 className="text-xl font-bold">{service.name}</h3>
-                <p className="mt-1 text-sm text-gold">{service.duration}</p>
+                <h3 className="text-xl font-bold text-foreground">{service.name}</h3>
+                <p className="mt-1 text-sm text-accent">{service.duration}</p>
               </div>
               <div className="mt-6">
-                <span className="font-[var(--font-accent)] text-5xl font-bold text-gold">
+                <span className="font-[var(--font-accent)] text-5xl font-bold text-accent">
                   {service.price}€
                 </span>
               </div>
@@ -92,9 +92,9 @@ export default function Services() {
               </p>
               <ul className="mt-6 flex-1 space-y-3">
                 {service.features.map((feature) => (
-                  <li key={feature} className="flex items-center gap-3 text-sm">
+                  <li key={feature} className="flex items-center gap-3 text-sm text-foreground">
                     <svg
-                      className="h-4 w-4 shrink-0 text-gold"
+                      className="h-4 w-4 shrink-0 text-accent"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -114,8 +114,8 @@ export default function Services() {
                 href="#reservation"
                 className={`mt-8 flex h-12 items-center justify-center rounded-full text-sm font-semibold transition-all ${
                   service.popular
-                    ? "btn-gold"
-                    : "border border-gold/50 text-gold hover:bg-gold hover:text-background"
+                    ? "btn-accent"
+                    : "border border-border text-foreground hover:bg-accent hover:text-white hover:border-accent"
                 }`}
               >
                 Réserver cette formule

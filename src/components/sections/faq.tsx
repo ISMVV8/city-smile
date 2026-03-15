@@ -52,17 +52,17 @@ export default function FAQ() {
   };
 
   return (
-    <section id="faq" className="scroll-mt-16 bg-card py-24 lg:py-32">
+    <section id="faq" className="scroll-mt-16 bg-white py-24 lg:py-32">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-gold">
+          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-accent">
             FAQ
           </p>
-          <h2 className="mt-4 font-[var(--font-accent)] text-3xl font-bold sm:text-4xl lg:text-5xl">
+          <h2 className="mt-4 font-[var(--font-accent)] text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl">
             Questions fréquentes
           </h2>
         </div>
@@ -71,15 +71,15 @@ export default function FAQ() {
           {faqs.map((faq, i) => (
             <div
               key={i}
-              className="overflow-hidden rounded-xl border border-border bg-background transition-colors hover:border-gold/30"
+              className="overflow-hidden rounded-xl border border-border bg-white card-shadow transition-all duration-300 hover:border-accent/30"
             >
               <button
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
                 className="flex w-full items-center justify-between px-6 py-5 text-left"
               >
-                <span className="pr-4 font-semibold">{faq.question}</span>
+                <span className="pr-4 font-semibold text-foreground">{faq.question}</span>
                 <svg
-                  className={`h-5 w-5 shrink-0 text-gold transition-transform duration-300 ${
+                  className={`h-5 w-5 shrink-0 text-accent transition-transform duration-300 ${
                     openIndex === i ? "rotate-180" : ""
                   }`}
                   fill="none"

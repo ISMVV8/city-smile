@@ -60,19 +60,19 @@ export default function Booking() {
   }
 
   const inputClasses =
-    "w-full rounded-xl border border-border bg-card px-4 py-3.5 text-sm text-white placeholder:text-muted focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold transition-colors";
+    "w-full rounded-xl border border-border bg-white px-4 py-3.5 text-sm text-foreground placeholder:text-muted focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent transition-colors";
 
   if (submitted) {
     return (
-      <section id="reservation" className="scroll-mt-16 py-24 lg:py-32">
+      <section id="reservation" className="scroll-mt-16 bg-section-alt py-24 lg:py-32">
         <div className="mx-auto max-w-2xl px-4 text-center sm:px-6 lg:px-8">
-          <div className="rounded-2xl border border-gold/30 bg-card p-12 glow-gold">
-            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-gold/20">
-              <svg className="h-8 w-8 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <div className="rounded-2xl border border-accent/30 bg-white p-12 shadow-md">
+            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-accent/10">
+              <svg className="h-8 w-8 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <h3 className="mt-6 font-[var(--font-accent)] text-2xl font-bold">
+            <h3 className="mt-6 font-[var(--font-accent)] text-2xl font-bold text-foreground">
               Demande envoyée !
             </h3>
             <p className="mt-3 text-muted">
@@ -81,7 +81,7 @@ export default function Booking() {
             </p>
             <button
               onClick={() => setSubmitted(false)}
-              className="btn-gold mt-8 rounded-full px-8 py-3 text-sm"
+              className="btn-accent mt-8 rounded-full px-8 py-3 text-sm"
             >
               Nouvelle réservation
             </button>
@@ -92,13 +92,13 @@ export default function Booking() {
   }
 
   return (
-    <section id="reservation" className="scroll-mt-16 py-24 lg:py-32">
+    <section id="reservation" className="scroll-mt-16 bg-section-alt py-24 lg:py-32">
       <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-gold">
+          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-accent">
             Réservation
           </p>
-          <h2 className="mt-4 font-[var(--font-accent)] text-3xl font-bold sm:text-4xl">
+          <h2 className="mt-4 font-[var(--font-accent)] text-3xl font-bold text-foreground sm:text-4xl">
             Prenez rendez-vous
           </h2>
           <p className="mx-auto mt-4 max-w-md text-muted">
@@ -119,7 +119,7 @@ export default function Booking() {
                 className={inputClasses}
               />
               {errors.name && (
-                <p className="mt-1 text-xs text-red-400">{errors.name}</p>
+                <p className="mt-1 text-xs text-red-500">{errors.name}</p>
               )}
             </div>
             <div>
@@ -132,7 +132,7 @@ export default function Booking() {
                 className={inputClasses}
               />
               {errors.email && (
-                <p className="mt-1 text-xs text-red-400">{errors.email}</p>
+                <p className="mt-1 text-xs text-red-500">{errors.email}</p>
               )}
             </div>
           </div>
@@ -148,7 +148,7 @@ export default function Booking() {
                 className={inputClasses}
               />
               {errors.phone && (
-                <p className="mt-1 text-xs text-red-400">{errors.phone}</p>
+                <p className="mt-1 text-xs text-red-500">{errors.phone}</p>
               )}
             </div>
             <div>
@@ -164,7 +164,7 @@ export default function Booking() {
                 <option value="vip">Blanchiment VIP — 249€</option>
               </select>
               {errors.service && (
-                <p className="mt-1 text-xs text-red-400">{errors.service}</p>
+                <p className="mt-1 text-xs text-red-500">{errors.service}</p>
               )}
             </div>
           </div>
@@ -178,7 +178,7 @@ export default function Booking() {
               className={inputClasses}
             />
             {errors.date && (
-              <p className="mt-1 text-xs text-red-400">{errors.date}</p>
+              <p className="mt-1 text-xs text-red-500">{errors.date}</p>
             )}
           </div>
 
@@ -195,7 +195,7 @@ export default function Booking() {
 
           <button
             type="submit"
-            className="btn-gold h-14 w-full rounded-full text-base font-semibold"
+            className="btn-accent h-14 w-full rounded-full text-base font-semibold"
           >
             Envoyer ma demande de réservation
           </button>
