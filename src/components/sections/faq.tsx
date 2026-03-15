@@ -1,6 +1,10 @@
-"use client";
-
-import { useState } from "react";
+import { Badge } from "@/components/ui/badge";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 const faqs = [
   {
@@ -35,22 +39,20 @@ const faqs = [
   },
 ];
 
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer,
+    },
+  })),
+};
+
 export default function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqs.map((faq) => ({
-      "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.answer,
-      },
-    })),
-  };
-
   return (
     <section id="faq" className="scroll-mt-16 bg-white py-24 lg:py-32">
       <script
@@ -59,57 +61,30 @@ export default function FAQ() {
       />
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-accent">
+          <Badge variant="secondary" className="bg-accent/10 text-accent hover:bg-accent/10">
             FAQ
-          </p>
+          </Badge>
           <h2 className="mt-4 font-[var(--font-accent)] text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl">
             Questions fréquentes
           </h2>
         </div>
 
-        <div className="mt-12 space-y-4">
+        <Accordion className="mt-12 space-y-4">
           {faqs.map((faq, i) => (
-            <div
+            <AccordionItem
               key={i}
-              className="overflow-hidden rounded-xl border border-border bg-white card-shadow transition-all duration-300 hover:border-accent/30"
+              value={`faq-${i}`}
+              className="rounded-xl border border-border bg-white px-6 shadow-sm transition-all duration-300 hover:border-accent/30 data-[state=open]:border-accent/30 data-[state=open]:shadow-md"
             >
-              <button
-                onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                className="flex w-full items-center justify-between px-6 py-5 text-left"
-              >
-                <span className="pr-4 font-semibold text-foreground">{faq.question}</span>
-                <svg
-                  className={`h-5 w-5 shrink-0 text-accent transition-transform duration-300 ${
-                    openIndex === i ? "rotate-180" : ""
-                  }`}
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
-              </button>
-              <div
-                className={`grid transition-all duration-300 ${
-                  openIndex === i
-                    ? "grid-rows-[1fr] opacity-100"
-                    : "grid-rows-[0fr] opacity-0"
-                }`}
-              >
-                <div className="overflow-hidden">
-                  <p className="px-6 pb-5 text-sm leading-relaxed text-muted">
-                    {faq.answer}
-                  </p>
-                </div>
-              </div>
-            </div>
+              <AccordionTrigger className="py-5 text-left font-semibold text-foreground hover:no-underline [&[data-state=open]>svg]:text-accent">
+                {faq.question}
+              </AccordionTrigger>
+              <AccordionContent className="pb-5 text-sm leading-relaxed text-muted">
+                {faq.answer}
+              </AccordionContent>
+            </AccordionItem>
           ))}
-        </div>
+        </Accordion>
       </div>
     </section>
   );

@@ -1,8 +1,14 @@
+import { ArrowRight } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+
 const results = [
   {
     before: "A2",
     after: "B1",
     teintes: 6,
+    maxTeintes: 9,
     gradientBefore: "from-amber-200 to-amber-300",
     gradientAfter: "from-sky-100 to-white",
   },
@@ -10,6 +16,7 @@ const results = [
     before: "A3",
     after: "A1",
     teintes: 8,
+    maxTeintes: 9,
     gradientBefore: "from-amber-300 to-amber-400",
     gradientAfter: "from-sky-50 to-white",
   },
@@ -17,6 +24,7 @@ const results = [
     before: "A3.5",
     after: "B1",
     teintes: 7,
+    maxTeintes: 9,
     gradientBefore: "from-amber-300 to-yellow-400",
     gradientAfter: "from-sky-100 to-white",
   },
@@ -24,6 +32,7 @@ const results = [
     before: "A4",
     after: "A2",
     teintes: 5,
+    maxTeintes: 9,
     gradientBefore: "from-amber-400 to-amber-500",
     gradientAfter: "from-sky-100 to-sky-50",
   },
@@ -34,9 +43,9 @@ export default function BeforeAfter() {
     <section id="resultats" className="scroll-mt-16 bg-white py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-accent">
+          <Badge variant="secondary" className="bg-accent/10 text-accent hover:bg-accent/10">
             Résultats
-          </p>
+          </Badge>
           <h2 className="mt-4 font-[var(--font-accent)] text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl">
             Des résultats visibles
           </h2>
@@ -48,18 +57,16 @@ export default function BeforeAfter() {
 
         <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {results.map((result, i) => (
-            <div
+            <Card
               key={i}
-              className="group overflow-hidden rounded-2xl border border-border bg-white card-shadow transition-all duration-300 hover:shadow-lg hover:border-accent/30"
+              className="group overflow-hidden border-border transition-all duration-300 hover:shadow-lg hover:border-accent/30"
             >
               {/* Visual before/after with gradients */}
               <div className="relative flex h-64 items-center justify-center overflow-hidden">
-                {/* Split background */}
                 <div className="absolute inset-0 flex">
                   <div className={`w-1/2 bg-gradient-to-br ${result.gradientBefore}`} />
                   <div className={`w-1/2 bg-gradient-to-br ${result.gradientAfter}`} />
                 </div>
-                {/* Divider */}
                 <div className="absolute inset-y-0 left-1/2 w-px bg-white/60" />
 
                 <div className="relative flex gap-4">
@@ -69,26 +76,13 @@ export default function BeforeAfter() {
                       <span className="text-2xl">😐</span>
                     </div>
                     <p className="mt-2 text-xs font-medium text-foreground/70">Avant</p>
-                    <p className="text-sm font-semibold text-foreground/50">
+                    <Badge variant="outline" className="mt-1 text-[10px]">
                       {result.before}
-                    </p>
+                    </Badge>
                   </div>
 
-                  {/* Arrow */}
                   <div className="flex items-center">
-                    <svg
-                      className="h-6 w-6 text-accent drop-shadow-md"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth={2}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M13 7l5 5m0 0l-5 5m5-5H6"
-                      />
-                    </svg>
+                    <ArrowRight className="h-6 w-6 text-accent drop-shadow-md" />
                   </div>
 
                   {/* After */}
@@ -97,21 +91,27 @@ export default function BeforeAfter() {
                       <span className="text-2xl">😁</span>
                     </div>
                     <p className="mt-2 text-xs font-medium text-foreground/70">Après</p>
-                    <p className="text-sm font-semibold text-accent">
+                    <Badge className="mt-1 bg-accent text-[10px] text-white hover:bg-accent/90">
                       {result.after}
-                    </p>
+                    </Badge>
                   </div>
                 </div>
               </div>
 
-              {/* Info */}
-              <div className="border-t border-border p-4 text-center">
+              <CardContent className="space-y-3 border-t border-border p-4 text-center">
                 <p className="text-lg font-bold text-accent">
                   +{result.teintes} teintes
                 </p>
                 <p className="text-xs text-muted">de blancheur gagnées</p>
-              </div>
-            </div>
+                <Progress
+                  value={Math.round((result.teintes / result.maxTeintes) * 100)}
+                  className="h-2 [&>div]:bg-accent"
+                />
+                <p className="text-[10px] text-muted">
+                  {result.teintes}/{result.maxTeintes} teintes max
+                </p>
+              </CardContent>
+            </Card>
           ))}
         </div>
       </div>

@@ -2,6 +2,9 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { CheckCircle2, Phone, Mail, MapPin, Clock } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 interface FormData {
   name: string;
@@ -20,6 +23,13 @@ const initialForm: FormData = {
   date: "",
   message: "",
 };
+
+const contactInfo = [
+  { icon: Phone, label: "+32 2 123 45 67" },
+  { icon: Mail, label: "contact@citysmile.be" },
+  { icon: MapPin, label: "Bruxelles, Belgique" },
+  { icon: Clock, label: "Lun-Sam 9h-19h" },
+];
 
 export default function Booking() {
   const [form, setForm] = useState<FormData>(initialForm);
@@ -42,7 +52,6 @@ export default function Booking() {
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!validate()) return;
-    // MVP: save to localStorage
     const bookings = JSON.parse(localStorage.getItem("citysmile_bookings") || "[]");
     bookings.push({ ...form, createdAt: new Date().toISOString() });
     localStorage.setItem("citysmile_bookings", JSON.stringify(bookings));
@@ -67,26 +76,26 @@ export default function Booking() {
     return (
       <section id="reservation" className="scroll-mt-16 bg-section-alt py-24 lg:py-32">
         <div className="mx-auto max-w-2xl px-4 text-center sm:px-6 lg:px-8">
-          <div className="rounded-2xl border border-accent/30 bg-white p-12 shadow-md">
-            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-accent/10">
-              <svg className="h-8 w-8 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-              </svg>
-            </div>
-            <h3 className="mt-6 font-[var(--font-accent)] text-2xl font-bold text-foreground">
-              Demande envoyée !
-            </h3>
-            <p className="mt-3 text-muted">
-              Merci pour votre réservation. Nous vous contacterons sous 24h pour
-              confirmer votre créneau.
-            </p>
-            <button
-              onClick={() => setSubmitted(false)}
-              className="btn-accent mt-8 rounded-full px-8 py-3 text-sm"
-            >
-              Nouvelle réservation
-            </button>
-          </div>
+          <Card className="border-accent/30 shadow-md">
+            <CardContent className="p-12">
+              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-accent/10">
+                <CheckCircle2 className="h-8 w-8 text-accent" />
+              </div>
+              <h3 className="mt-6 font-[var(--font-accent)] text-2xl font-bold text-foreground">
+                Demande envoyée !
+              </h3>
+              <p className="mt-3 text-muted">
+                Merci pour votre réservation. Nous vous contacterons sous 24h pour
+                confirmer votre créneau.
+              </p>
+              <button
+                onClick={() => setSubmitted(false)}
+                className="btn-accent mt-8 rounded-full px-8 py-3 text-sm"
+              >
+                Nouvelle réservation
+              </button>
+            </CardContent>
+          </Card>
         </div>
       </section>
     );
@@ -96,9 +105,9 @@ export default function Booking() {
     <section id="reservation" className="scroll-mt-16 bg-section-alt py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-accent">
+          <Badge variant="secondary" className="bg-accent/10 text-accent hover:bg-accent/10">
             Réservation
-          </p>
+          </Badge>
           <h2 className="mt-4 font-[var(--font-accent)] text-3xl font-bold text-foreground sm:text-4xl">
             Prenez rendez-vous
           </h2>
@@ -109,100 +118,121 @@ export default function Booking() {
         </div>
 
         <div className="mt-12 grid items-start gap-12 lg:grid-cols-2">
-          {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-5" noValidate>
-            <div className="grid gap-5 sm:grid-cols-2">
-              <div>
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Nom complet"
-                  value={form.name}
-                  onChange={handleChange}
-                  className={inputClasses}
-                />
-                {errors.name && (
-                  <p className="mt-1 text-xs text-red-500">{errors.name}</p>
-                )}
-              </div>
-              <div>
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  value={form.email}
-                  onChange={handleChange}
-                  className={inputClasses}
-                />
-                {errors.email && (
-                  <p className="mt-1 text-xs text-red-500">{errors.email}</p>
-                )}
-              </div>
-            </div>
+          {/* Form wrapped in Card */}
+          <Card className="border-border">
+            <CardContent className="p-6 sm:p-8">
+              <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+                <div className="grid gap-5 sm:grid-cols-2">
+                  <div>
+                    <input
+                      type="text"
+                      name="name"
+                      placeholder="Nom complet"
+                      value={form.name}
+                      onChange={handleChange}
+                      className={inputClasses}
+                    />
+                    {errors.name && (
+                      <p className="mt-1 text-xs text-red-500">{errors.name}</p>
+                    )}
+                  </div>
+                  <div>
+                    <input
+                      type="email"
+                      name="email"
+                      placeholder="Email"
+                      value={form.email}
+                      onChange={handleChange}
+                      className={inputClasses}
+                    />
+                    {errors.email && (
+                      <p className="mt-1 text-xs text-red-500">{errors.email}</p>
+                    )}
+                  </div>
+                </div>
 
-            <div className="grid gap-5 sm:grid-cols-2">
-              <div>
-                <input
-                  type="tel"
-                  name="phone"
-                  placeholder="Téléphone"
-                  value={form.phone}
-                  onChange={handleChange}
-                  className={inputClasses}
-                />
-                {errors.phone && (
-                  <p className="mt-1 text-xs text-red-500">{errors.phone}</p>
-                )}
-              </div>
-              <div>
-                <select
-                  name="service"
-                  value={form.service}
-                  onChange={handleChange}
-                  className={inputClasses}
+                <div className="grid gap-5 sm:grid-cols-2">
+                  <div>
+                    <input
+                      type="tel"
+                      name="phone"
+                      placeholder="Téléphone"
+                      value={form.phone}
+                      onChange={handleChange}
+                      className={inputClasses}
+                    />
+                    {errors.phone && (
+                      <p className="mt-1 text-xs text-red-500">{errors.phone}</p>
+                    )}
+                  </div>
+                  <div>
+                    <select
+                      name="service"
+                      value={form.service}
+                      onChange={handleChange}
+                      className={inputClasses}
+                    >
+                      <option value="">Choisir un service</option>
+                      <option value="express">Blanchiment Express — 79€</option>
+                      <option value="premium">Blanchiment Premium — 149€</option>
+                      <option value="vip">Blanchiment VIP — 249€</option>
+                    </select>
+                    {errors.service && (
+                      <p className="mt-1 text-xs text-red-500">{errors.service}</p>
+                    )}
+                  </div>
+                </div>
+
+                <div>
+                  <input
+                    type="date"
+                    name="date"
+                    value={form.date}
+                    onChange={handleChange}
+                    className={inputClasses}
+                  />
+                  {errors.date && (
+                    <p className="mt-1 text-xs text-red-500">{errors.date}</p>
+                  )}
+                </div>
+
+                <div>
+                  <textarea
+                    name="message"
+                    placeholder="Message (optionnel)"
+                    rows={4}
+                    value={form.message}
+                    onChange={handleChange}
+                    className={`${inputClasses} resize-none`}
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className="btn-accent h-14 w-full rounded-full text-base font-semibold"
                 >
-                  <option value="">Choisir un service</option>
-                  <option value="express">Blanchiment Express — 79€</option>
-                  <option value="premium">Blanchiment Premium — 149€</option>
-                  <option value="vip">Blanchiment VIP — 249€</option>
-                </select>
-                {errors.service && (
-                  <p className="mt-1 text-xs text-red-500">{errors.service}</p>
-                )}
+                  Envoyer ma demande de réservation
+                </button>
+              </form>
+
+              {/* Contact badges */}
+              <div className="mt-6 flex flex-wrap gap-2">
+                {contactInfo.map((info) => {
+                  const Icon = info.icon;
+                  return (
+                    <Badge
+                      key={info.label}
+                      variant="secondary"
+                      className="bg-accent/5 text-xs text-muted hover:bg-accent/10"
+                    >
+                      <Icon className="mr-1 h-3 w-3 text-accent" />
+                      {info.label}
+                    </Badge>
+                  );
+                })}
               </div>
-            </div>
-
-            <div>
-              <input
-                type="date"
-                name="date"
-                value={form.date}
-                onChange={handleChange}
-                className={inputClasses}
-              />
-              {errors.date && (
-                <p className="mt-1 text-xs text-red-500">{errors.date}</p>
-              )}
-            </div>
-
-            <div>
-              <textarea
-                name="message"
-                placeholder="Message (optionnel)"
-                rows={4}
-                value={form.message}
-                onChange={handleChange}
-                className={`${inputClasses} resize-none`}
-              />
-            </div>
-
-            <button
-              type="submit"
-              className="btn-accent h-14 w-full rounded-full text-base font-semibold"
-            >
-              Envoyer ma demande de réservation
-            </button>
-          </form>
+            </CardContent>
+          </Card>
 
           {/* Side Image */}
           <div className="relative hidden lg:block">
@@ -216,7 +246,6 @@ export default function Booking() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-accent/20 via-transparent to-transparent" />
             </div>
-            {/* Floating card */}
             <div className="absolute -bottom-4 -left-4 rounded-2xl border border-white/20 bg-white/90 px-6 py-4 shadow-xl backdrop-blur-sm">
               <p className="text-sm font-semibold text-foreground">Confirmation sous 24h</p>
               <p className="text-xs text-muted">Réponse rapide garantie</p>
