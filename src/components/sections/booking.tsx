@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 
 interface FormData {
@@ -93,7 +94,7 @@ export default function Booking() {
 
   return (
     <section id="reservation" className="scroll-mt-16 bg-section-alt py-24 lg:py-32">
-      <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <p className="text-sm font-semibold uppercase tracking-[0.3em] text-accent">
             Réservation
@@ -107,99 +108,121 @@ export default function Booking() {
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="mt-12 space-y-5" noValidate>
-          <div className="grid gap-5 sm:grid-cols-2">
+        <div className="mt-12 grid items-start gap-12 lg:grid-cols-2">
+          {/* Form */}
+          <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+            <div className="grid gap-5 sm:grid-cols-2">
+              <div>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Nom complet"
+                  value={form.name}
+                  onChange={handleChange}
+                  className={inputClasses}
+                />
+                {errors.name && (
+                  <p className="mt-1 text-xs text-red-500">{errors.name}</p>
+                )}
+              </div>
+              <div>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  value={form.email}
+                  onChange={handleChange}
+                  className={inputClasses}
+                />
+                {errors.email && (
+                  <p className="mt-1 text-xs text-red-500">{errors.email}</p>
+                )}
+              </div>
+            </div>
+
+            <div className="grid gap-5 sm:grid-cols-2">
+              <div>
+                <input
+                  type="tel"
+                  name="phone"
+                  placeholder="Téléphone"
+                  value={form.phone}
+                  onChange={handleChange}
+                  className={inputClasses}
+                />
+                {errors.phone && (
+                  <p className="mt-1 text-xs text-red-500">{errors.phone}</p>
+                )}
+              </div>
+              <div>
+                <select
+                  name="service"
+                  value={form.service}
+                  onChange={handleChange}
+                  className={inputClasses}
+                >
+                  <option value="">Choisir un service</option>
+                  <option value="express">Blanchiment Express — 79€</option>
+                  <option value="premium">Blanchiment Premium — 149€</option>
+                  <option value="vip">Blanchiment VIP — 249€</option>
+                </select>
+                {errors.service && (
+                  <p className="mt-1 text-xs text-red-500">{errors.service}</p>
+                )}
+              </div>
+            </div>
+
             <div>
               <input
-                type="text"
-                name="name"
-                placeholder="Nom complet"
-                value={form.name}
+                type="date"
+                name="date"
+                value={form.date}
                 onChange={handleChange}
                 className={inputClasses}
               />
-              {errors.name && (
-                <p className="mt-1 text-xs text-red-500">{errors.name}</p>
+              {errors.date && (
+                <p className="mt-1 text-xs text-red-500">{errors.date}</p>
               )}
             </div>
+
             <div>
-              <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                value={form.email}
+              <textarea
+                name="message"
+                placeholder="Message (optionnel)"
+                rows={4}
+                value={form.message}
                 onChange={handleChange}
-                className={inputClasses}
+                className={`${inputClasses} resize-none`}
               />
-              {errors.email && (
-                <p className="mt-1 text-xs text-red-500">{errors.email}</p>
-              )}
             </div>
-          </div>
 
-          <div className="grid gap-5 sm:grid-cols-2">
-            <div>
-              <input
-                type="tel"
-                name="phone"
-                placeholder="Téléphone"
-                value={form.phone}
-                onChange={handleChange}
-                className={inputClasses}
+            <button
+              type="submit"
+              className="btn-accent h-14 w-full rounded-full text-base font-semibold"
+            >
+              Envoyer ma demande de réservation
+            </button>
+          </form>
+
+          {/* Side Image */}
+          <div className="relative hidden lg:block">
+            <div className="relative aspect-[3/4] overflow-hidden rounded-3xl shadow-2xl">
+              <Image
+                src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=800&q=80"
+                alt="Patiente souriante dans un fauteuil dentaire lors d'un traitement"
+                fill
+                className="object-cover"
+                sizes="(min-width: 1024px) 50vw, 100vw"
               />
-              {errors.phone && (
-                <p className="mt-1 text-xs text-red-500">{errors.phone}</p>
-              )}
+              <div className="absolute inset-0 bg-gradient-to-t from-accent/20 via-transparent to-transparent" />
             </div>
-            <div>
-              <select
-                name="service"
-                value={form.service}
-                onChange={handleChange}
-                className={inputClasses}
-              >
-                <option value="">Choisir un service</option>
-                <option value="express">Blanchiment Express — 79€</option>
-                <option value="premium">Blanchiment Premium — 149€</option>
-                <option value="vip">Blanchiment VIP — 249€</option>
-              </select>
-              {errors.service && (
-                <p className="mt-1 text-xs text-red-500">{errors.service}</p>
-              )}
+            {/* Floating card */}
+            <div className="absolute -bottom-4 -left-4 rounded-2xl border border-white/20 bg-white/90 px-6 py-4 shadow-xl backdrop-blur-sm">
+              <p className="text-sm font-semibold text-foreground">Confirmation sous 24h</p>
+              <p className="text-xs text-muted">Réponse rapide garantie</p>
             </div>
           </div>
-
-          <div>
-            <input
-              type="date"
-              name="date"
-              value={form.date}
-              onChange={handleChange}
-              className={inputClasses}
-            />
-            {errors.date && (
-              <p className="mt-1 text-xs text-red-500">{errors.date}</p>
-            )}
-          </div>
-
-          <div>
-            <textarea
-              name="message"
-              placeholder="Message (optionnel)"
-              rows={4}
-              value={form.message}
-              onChange={handleChange}
-              className={`${inputClasses} resize-none`}
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="btn-accent h-14 w-full rounded-full text-base font-semibold"
-          >
-            Envoyer ma demande de réservation
-          </button>
-        </form>
+        </div>
       </div>
     </section>
   );

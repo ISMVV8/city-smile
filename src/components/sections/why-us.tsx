@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const usps = [
   {
     title: "Technologie LED dernière génération",
@@ -54,23 +56,45 @@ export default function WhyUs() {
           </h2>
         </div>
 
-        <div className="mt-16 grid gap-8 sm:grid-cols-2">
-          {usps.map((usp) => (
-            <div
-              key={usp.title}
-              className="group flex gap-5 rounded-2xl border border-border bg-white p-6 card-shadow transition-all duration-300 hover:shadow-lg hover:border-accent/30 sm:p-8"
-            >
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent transition-colors group-hover:bg-accent/20">
-                {usp.icon}
+        <div className="mt-16 grid items-center gap-12 lg:grid-cols-2">
+          {/* USPs */}
+          <div className="grid gap-6 sm:grid-cols-2">
+            {usps.map((usp) => (
+              <div
+                key={usp.title}
+                className="group flex gap-4 rounded-2xl border border-border bg-white p-5 card-shadow transition-all duration-300 hover:shadow-lg hover:border-accent/30"
+              >
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent transition-colors group-hover:bg-accent/20">
+                  {usp.icon}
+                </div>
+                <div>
+                  <h3 className="text-base font-bold text-foreground">{usp.title}</h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-muted">
+                    {usp.description}
+                  </p>
+                </div>
               </div>
-              <div>
-                <h3 className="text-lg font-bold text-foreground">{usp.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">
-                  {usp.description}
-                </p>
-              </div>
+            ))}
+          </div>
+
+          {/* Side Image */}
+          <div className="relative hidden lg:block">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-2xl">
+              <Image
+                src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=800&q=80"
+                alt="Cabinet dentaire moderne et lumineux City Smile à Bruxelles"
+                fill
+                className="object-cover"
+                sizes="(min-width: 1024px) 50vw, 100vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-accent/10 to-transparent" />
             </div>
-          ))}
+            {/* Floating stat */}
+            <div className="absolute -bottom-4 -right-4 rounded-2xl border border-white/20 bg-accent px-6 py-4 text-white shadow-xl">
+              <p className="font-[var(--font-accent)] text-3xl font-bold">4.9/5</p>
+              <p className="text-xs text-white/80">Note clients Google</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function FormationPricing() {
@@ -13,7 +14,8 @@ export default function FormationPricing() {
           </h2>
         </div>
 
-        <div className="mx-auto mt-12 max-w-lg">
+        <div className="mx-auto mt-12 grid max-w-4xl items-center gap-10 lg:grid-cols-2">
+          {/* Pricing Card */}
           <div className="relative overflow-hidden rounded-2xl border border-accent/30 bg-white p-8 shadow-lg sm:p-10">
             {/* Badge */}
             <div className="absolute right-6 top-6">
@@ -68,6 +70,25 @@ export default function FormationPricing() {
             >
               S&apos;inscrire à la formation
             </Link>
+          </div>
+
+          {/* Certification Image */}
+          <div className="relative hidden lg:block">
+            <div className="relative aspect-[3/4] overflow-hidden rounded-3xl shadow-2xl">
+              <Image
+                src="https://images.unsplash.com/photo-1523050854058-8df90110c476?w=600&q=80"
+                alt="Certification et diplôme de formation en blanchiment dentaire"
+                fill
+                className="object-cover"
+                sizes="(min-width: 1024px) 50vw, 100vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-accent/20 via-transparent to-transparent" />
+            </div>
+            {/* Floating card */}
+            <div className="absolute -bottom-4 -right-4 rounded-2xl border border-white/20 bg-white/90 px-6 py-4 shadow-xl backdrop-blur-sm">
+              <p className="text-sm font-semibold text-accent">Certification reconnue</p>
+              <p className="text-xs text-muted">Validez vos compétences</p>
+            </div>
           </div>
         </div>
       </div>

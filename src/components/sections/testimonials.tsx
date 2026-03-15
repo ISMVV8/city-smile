@@ -1,27 +1,33 @@
+import Image from "next/image";
+
 const testimonials = [
   {
     name: "Sophie M.",
     rating: 5,
     text: "Incroyable ! J'ai gagné 7 teintes en une seule séance. L'équipe est professionnelle et le cadre est magnifique. Je recommande à 100%.",
     service: "Blanchiment Premium",
+    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80",
   },
   {
     name: "Karim B.",
     rating: 5,
     text: "Je suis venu pour le blanchiment express avant un événement important. Résultat bluffant en seulement 30 minutes. Top !",
     service: "Blanchiment Express",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80",
   },
   {
     name: "Julie D.",
     rating: 5,
     text: "Expérience VIP du début à la fin. Le suivi personnalisé est un vrai plus. Mes dents n'ont jamais été aussi blanches.",
     service: "Blanchiment VIP",
+    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80",
   },
   {
     name: "Thomas L.",
     rating: 5,
     text: "Très sceptique au départ, je suis maintenant conquis. Aucune douleur et un résultat naturel. Merci City Smile !",
     service: "Blanchiment Premium",
+    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&q=80",
   },
 ];
 
@@ -69,9 +75,20 @@ export default function Testimonials() {
               <p className="mt-4 flex-1 text-sm leading-relaxed text-muted">
                 &ldquo;{t.text}&rdquo;
               </p>
-              <div className="mt-6 border-t border-border pt-4">
-                <p className="font-semibold text-foreground">{t.name}</p>
-                <p className="text-xs text-accent">{t.service}</p>
+              <div className="mt-6 flex items-center gap-3 border-t border-border pt-4">
+                <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full">
+                  <Image
+                    src={t.avatar}
+                    alt={`Photo de ${t.name}`}
+                    fill
+                    className="object-cover"
+                    sizes="40px"
+                  />
+                </div>
+                <div>
+                  <p className="font-semibold text-foreground">{t.name}</p>
+                  <p className="text-xs text-accent">{t.service}</p>
+                </div>
               </div>
             </div>
           ))}

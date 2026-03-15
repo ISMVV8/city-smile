@@ -1,8 +1,32 @@
 const results = [
-  { before: "A2", after: "B1", teintes: 6 },
-  { before: "A3", after: "A1", teintes: 8 },
-  { before: "A3.5", after: "B1", teintes: 7 },
-  { before: "A4", after: "A2", teintes: 5 },
+  {
+    before: "A2",
+    after: "B1",
+    teintes: 6,
+    gradientBefore: "from-amber-200 to-amber-300",
+    gradientAfter: "from-sky-100 to-white",
+  },
+  {
+    before: "A3",
+    after: "A1",
+    teintes: 8,
+    gradientBefore: "from-amber-300 to-amber-400",
+    gradientAfter: "from-sky-50 to-white",
+  },
+  {
+    before: "A3.5",
+    after: "B1",
+    teintes: 7,
+    gradientBefore: "from-amber-300 to-yellow-400",
+    gradientAfter: "from-sky-100 to-white",
+  },
+  {
+    before: "A4",
+    after: "A2",
+    teintes: 5,
+    gradientBefore: "from-amber-400 to-amber-500",
+    gradientAfter: "from-sky-100 to-sky-50",
+  },
 ];
 
 export default function BeforeAfter() {
@@ -28,17 +52,23 @@ export default function BeforeAfter() {
               key={i}
               className="group overflow-hidden rounded-2xl border border-border bg-white card-shadow transition-all duration-300 hover:shadow-lg hover:border-accent/30"
             >
-              {/* Placeholder visual */}
-              <div className="relative flex h-64 items-center justify-center bg-section-alt">
-                <div className="flex gap-4">
+              {/* Visual before/after with gradients */}
+              <div className="relative flex h-64 items-center justify-center overflow-hidden">
+                {/* Split background */}
+                <div className="absolute inset-0 flex">
+                  <div className={`w-1/2 bg-gradient-to-br ${result.gradientBefore}`} />
+                  <div className={`w-1/2 bg-gradient-to-br ${result.gradientAfter}`} />
+                </div>
+                {/* Divider */}
+                <div className="absolute inset-y-0 left-1/2 w-px bg-white/60" />
+
+                <div className="relative flex gap-4">
                   {/* Before */}
                   <div className="text-center">
-                    <div className="flex h-20 w-20 items-center justify-center rounded-full bg-amber-100 transition-transform duration-300 group-hover:scale-110">
-                      <svg className="h-10 w-10 text-amber-400" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5-5c.78 2.34 2.72 4 5 4s4.22-1.66 5-4H7z"/>
-                      </svg>
+                    <div className="flex h-20 w-20 items-center justify-center rounded-full bg-white/80 shadow-md backdrop-blur-sm transition-transform duration-300 group-hover:scale-110">
+                      <span className="text-2xl">😐</span>
                     </div>
-                    <p className="mt-2 text-xs text-muted">Avant</p>
+                    <p className="mt-2 text-xs font-medium text-foreground/70">Avant</p>
                     <p className="text-sm font-semibold text-foreground/50">
                       {result.before}
                     </p>
@@ -47,7 +77,7 @@ export default function BeforeAfter() {
                   {/* Arrow */}
                   <div className="flex items-center">
                     <svg
-                      className="h-6 w-6 text-accent"
+                      className="h-6 w-6 text-accent drop-shadow-md"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -63,12 +93,10 @@ export default function BeforeAfter() {
 
                   {/* After */}
                   <div className="text-center">
-                    <div className="flex h-20 w-20 items-center justify-center rounded-full bg-accent/10 transition-transform duration-300 group-hover:scale-110">
-                      <svg className="h-10 w-10 text-accent" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5-5c.78 2.34 2.72 4 5 4s4.22-1.66 5-4H7z"/>
-                      </svg>
+                    <div className="flex h-20 w-20 items-center justify-center rounded-full bg-white/80 shadow-md backdrop-blur-sm transition-transform duration-300 group-hover:scale-110">
+                      <span className="text-2xl">😁</span>
                     </div>
-                    <p className="mt-2 text-xs text-muted">Après</p>
+                    <p className="mt-2 text-xs font-medium text-foreground/70">Après</p>
                     <p className="text-sm font-semibold text-accent">
                       {result.after}
                     </p>
